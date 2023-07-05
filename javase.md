@@ -1274,10 +1274,409 @@ final 可以修饰类，属性，方法和局部变量。
 
 ![image-20230704084752950](C:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20230704084752950.png)
 
-3.当不希望类的某个属性的值被修改
+3.当不希望类的某个属性的值被修改，可以用final修饰。
 
 ![image-20230704085346662](C:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20230704085346662.png)
 
 ![image-20230704085301468](C:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20230704085301468.png)
 
-![image-20230704085200541](C:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20230704085200541.png)
+4.当不希望某个局部变量被修改。可以使用final修饰
+
+###  ![image-20230704085200541](C:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20230704085200541.png)final细节
+
+1.final修饰的属性又叫常量，一般用xx_xx_xx来命名
+
+2.final修饰的属性在定义时，必须赋初值，并且以后不再修改，复制可以在如下位置之一：
+
+（1）定义时：如public final double TAX_RATE = 0.08;
+
+（2）在构造器中
+
+（3）在代码块中
+
+![image-20230704101508035](C:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20230704101508035.png)
+
+3.如果final修饰的属性是**静态**的，则初始化的位置只能是：
+
+（1）定义时
+
+（2）在静态代码块，不能再构造器中赋值。
+
+
+
+4.final类不能继承，但是可以实例化对象。
+
+5.如果类不是final类，但是含有final方法，则该方法虽然不能重写，但是可以被继承。
+
+6.一般来说，如果一个类已经是final类了，就没必要再将方法修饰成final方法。
+
+7.final不能修饰构造方法（即构造器）
+
+8.final和static往往搭配使用，效率更高，底层编译器做了优化处理
+
+9.包装类（Integer，Double，float,Boolean等都是final），String也是final类。
+
+## 抽象类
+
+### 抽象类介绍
+
+(1)用abstract关键字来修饰一个**类**时，这个类就叫抽象类
+
+**访问修饰符 abstract 类名{**
+
+**}**
+
+(2)用abstract 关键字来修饰一个**方法**时，这个方法就是抽象方法
+
+访问修饰符 abstract 返回类型 方法名（参数列表）；//没有方法体
+
+(3)抽象类的价值更多作用是在于设计，是设计者设计好后，让子类继承并实现抽象类（）
+
+### 抽象类细节
+
+(1)抽象类不能实例化
+
+(2)**抽象类不一定要包含abstract方法，也就是说，抽象类可以没有abstract方法。**
+
+(3)**一旦包含了abstract方法，则这个类必须声明为abstra**ct。
+
+(4)abstract只能修饰类和方法，不能修饰属性和其他的。
+
+(5)抽象类可以有任意成员【抽象类本质还是类】，比如：非抽象方法，构造器，静态属性等等
+
+(6)抽象方法不能有主体，即不能实现。如图所示![image-20230704152452801](C:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20230704152452801.png)
+
+(7)如果一个类继承了抽象类，则它必须实现抽象类的所有抽象方法，除非它自己也声明为abstract类
+
+(8)抽象方法不能使用**private，final，和static**来修饰，因为这些关键字都是和重写相违背的。
+
+## 接口
+
+### 基本介绍
+
+接口就是给出一些没有实现的方法，封装到一起，到某个类要使用的时候，再根据具体情况把这些方法写出来。
+
+语法：
+
+<u>interface 接口名{</u>
+
+<u>//属性</u>
+
+<u>//方法（**1.抽象方法 2.默认实现方法 3.静态方法**）</u>
+
+<u>}</u>
+
+<u>class 类名 implements 接口{</u>
+
+<u>自己属性；</u>
+
+<u>自己方法；</u>
+
+<u>必须实现的接口的抽象方法</u>
+
+<u>}</u>
+
+### 接口细节
+
+1.接口不能被实例化
+
+2.接口中所有的**方法**是public方法，接口中抽象方法，可以不用abstract 修饰
+
+![image-20230704165546973](C:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20230704165546973.png)
+
+3.一个普通类实现接口，就必须将该接口的所有方法都实现
+
+4.抽象类实现接口，可以不用实现接口的方法
+
+5.一个类同时可以实现多个接口
+
+![image-20230704163913042](C:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20230704163913042.png)
+
+6.接口中的属性，只能是final的，而且是 public static final修饰符。
+
+比如：**int a = 1；实际上是public static final int a = 1**；（必须初始化）
+
+7.接口中属性的访问形式：**接口名.属性名**
+
+8.接中不能继承其他的类，但是可以继承多个别的接口![image-20230704190520589](C:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20230704190520589.png)
+
+![image-20230704161959446](C:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20230704161959446.png)
+
+## 内部类
+
+### 基本介绍
+
+一个类的内部又完整的嵌套了另一个类结构。被嵌套的类称为内部类（inner class），嵌套其他类的类称为外部类（outer class）。
+
+是类的五大成员之一（**属性，方法，构造器，代码块，内部类**）。
+
+### 基本语法
+
+**class Outer{//外部类**
+
+​     **class Inner{//内部类**
+
+​       **}**
+
+**}**
+
+**class Other{//外部其他类**
+
+**}**
+
+### 内部类的分类
+
+**定义在外部类局部位置上（比如方法内）：**
+
+1.局部内部类（有类名）
+
+2<u>.匿名内部类（没有类名，重点）</u>
+
+**定义在外部类的成员位置上：**
+
+1.成员内部类（没有static修饰）
+
+2.静态内部类（使用static修饰）
+
+### 局部内部类的使用
+
+说明：局部内部类是定义在外部类的局部位置，比如方法体中，并且有类名。
+
+1.可以直接访问外部类的所有成员，包括私有的
+
+2.不能添加访问修饰符，因为它的地位就是一个局部变量。局部变量是不能使用修饰符的。但是**可以使用final修饰**，因为局部变量也可以使用final![image-20230704203510840](C:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20230704203510840.png)
+
+3**.作用域**：仅仅在定义它的方法或代码块中。
+
+4.局部内部类--访问--->外部类的成员【访问方式：直接访问】
+
+5.外部类--访问--->局部内部类成员【访问方式：创建对象，再访问（注意：必须在作用域内）】
+
+6.外部其它类--不能访问---->局部内部类（因为 局部内部类地位是一个局部变量）
+
+7.如果外部类和局部内部类的成员重名时，默认遵循**就近原则**，如果想访问外部类的成员，则可以使用（外部类名.this.成员）去访问
+
+**System.out.println("外部类的n2 = " + 外部类名.this.n2);**
+
+**记住：**
+
+**（1)局部内部类定义在方法中/代码块中**
+
+**（2）作用域在方法体或者代码块中**
+
+**（3）本质仍然是一个类**
+
+### 匿名内部类的使用（重要！！！）
+
+- 本质是类
+- 内部类
+- 该类没有名字
+- 同时还是一个对象
+
+说明：匿名内部类是定义在外部类的局部位置，比如方法体中，并且没有类名
+
+#### 基本语法
+
+**new 类或接口 （参数列表）{**
+
+**类体**
+
+**}；**
+
+#### 细节
+
+1.可以直接访问外部类的所有成员，包括私有的
+
+2.不能添加访问修饰符，因为它的地位就是一个局部变量
+
+3.作用域：仅仅在定义它的方法或代码块中
+
+4.匿名内部类--访问-->外部类成员【访问方式：直接访问】
+
+5.外部其它类--不能访问--->匿名内部类（因为匿名内部类地位是一个局部变量）
+
+6.如果外部类和匿名内部类的成员重名时，匿名内部类访问的话，默认遵循就近原则，如果想访问外部类的成员，则可以使用（外部 类名.this.成员）去访问
+
+### 成员内部类
+
+**说明：成员内部类是定义在外部类的成员位置，并且没有static修饰。**
+
+1.可以直接访问外部类的所有成员，包括私有的
+
+2.可以添加任意访问修饰符（public，protected，默认，private），因为它的地位就是一个成员。
+
+3.作用域：和外部类的其他成员一样，为整个类体
+
+4.成员内部类---访问---->外部类（比如：属性）[访问方式：直接访问](说明）
+
+5.外部类---访问----->内部类（说明）访问方式：创建对象，再访问
+
+6.外部其他类---访问---->成员内部类
+
+7.如果外部类和内部类的成员重名时，内部类访问的话，默认遵循**就近原则**，如果想访问外部类成员，则可以使用**（外部类名.this.成员）**去访问。
+
+### 静态内部类
+
+#### 静态内部类的使用
+
+**说明：静态内部类是定义在外部类的成员位置，并且有static修饰**
+
+1.可以直接访问外部类的所有静态成员，包含私有的，但不能直接访问非静态成员
+
+2.可以添加任意访问修饰符（public、protected、默认、private),因为它的地位就一个成员。
+
+3.作用域：同其他的成员，为整个类体
+
+4.静态内部类--访问-->外部类（比如静态属性）【访问方式：直接访问所有静态成员】
+
+5.外部类--访问-->静态内部类【访问方式：创建对象，再访问】
+
+6.外部其它类--访问-->静态内部类
+
+7.如果外部类和静态内部类的成员重名时，静态内部类访问时，默认遵循就近原则，如果想访问外部类的成员，则可以使用（外部类名.成员）去访问。
+
+
+
+
+
+
+
+# 枚举和注解
+
+## 基本介绍
+
+1.枚举对应英文（enumeration，简写enum）
+
+2.枚举是一组常量的集合
+
+3.枚举属于一种特殊的类，里面只含有一组有限的特定的对象。
+
+## 枚举的两种实现方式
+
+- 自定义类实现枚举
+- 使用enum关键字实现枚举
+
+### *自定义类实现枚举
+
+1.不需要提供setXXX方法，因为枚举对象值通常为只读
+
+2.对枚举对象/属性使用**final + static**共同修饰，实现底层优化。
+
+3.枚举对象名通常使用**全部大写**，常量的命名规范
+
+4.枚举对象根据需要，也可以有多个属性
+
+![image-20230705160440738](C:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20230705160440738.png)
+
+#### 代码演示
+
+```java
+public class Enumtest1 {
+    public static void main(String[] args) {
+        System.out.println(Season.AUTUMU);
+    }
+}
+class Season{
+    private String name;
+    private String des;//描述
+    public static final Season SPRING = new Season("春天","温暖");
+    public static final Season SUMMER = new Season("夏天","炎热");
+    public static final Season AUTUMU = new Season("秋天","凉爽");
+    public static final Season WINTER = new Season("冬天","寒冷");
+
+    private Season(String name,String des) {
+        this.name = name;
+        this.des = des;
+
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDes() {
+        return des;
+    }
+
+    @Override
+    public String toString() {
+        return "Season{" +
+                "name='" + name + '\'' +
+                ", des='" + des + '\'' +
+                '}';
+    }
+}
+```
+
+
+
+#### 小结：
+
+进行自定义类实现枚举，有如下特点：
+
+1)构造器私有化
+
+2)本类内部创建一组对象门
+
+3)对外暴露对象（通过为对象添加public final static修饰符）
+
+4)可以提供get方法，但是不要提供set
+
+### *使用enum关键字实现枚举
+
+#### 代码演示
+
+```java
+public class Enumtest1 {
+    public static void main(String[] args) {
+        System.out.println(Season.AUTUMN);
+    }
+}
+enum Season{
+
+    SPRING("春天","温暖"),SUMMER ("夏天","炎热"),AUTUMN("秋天","凉爽"),WINTER("冬天","寒冷");
+    private String name;
+    private String des;//描述
+    /*public static final Season SPRING = new Season("春天","温暖");
+    public static final Season SUMMER = new Season("夏天","炎热");
+    public static final Season AUTUMU = new Season("秋天","凉爽");
+    public static final Season WINTER = new Season("冬天","寒冷");
+*/
+    private Season(String name,String des) {
+        this.name = name;
+        this.des = des;
+
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDes() {
+        return des;
+    }
+
+    @Override
+    public String toString() {
+        return "Season{" +
+                "name='" + name + '\'' +
+                ", des='" + des + '\'' +
+                '}';
+    }
+}
+```
+
+![image-20230705163014428](C:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20230705163014428.png)
+
+## enum关键字实现枚举注意事项 
+
+1.当我们使用enum关键字开发一个枚举类时，默认会继承Enum类
+
+2.传统的public static final Season2 SPRING=new Season2("春天","温暖");简化成SPRING("春天","温暖")
+
+3.如果使用无参构造器 创建 枚举对象，则**实参列表和小括号**都可以省略·
+
+4.当有多个枚举对象时，使用，间隔，最后有一个分号结尾
+
+5.枚举对象必须放在枚举类的行首.
+
